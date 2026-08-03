@@ -2,6 +2,8 @@
 A cozy little game where you manage a coffe shop in the forest
 <img align = "right" width="459.5" height="257" alt="Screenshot 2026-08-03 204140" src="https://github.com/user-attachments/assets/621ef0ab-1355-41ab-ad88-e9ed5df6a852" />
 
+<"insert game link here">
+
 # How to play
 **Controls:** 
 * mouse movement
@@ -19,3 +21,16 @@ A cozy little game where you manage a coffe shop in the forest
 * drag the full coffe cups to the box
 * serve the customers
 * upgrade
+
+# Content of the demo
+* 1 type of drink
+* 3 upgrades
+* Customer serving
+* Very cozy game loop
+
+ # Credits
+* Made with the Unity game engine
+* wrote in C# along with VS code
+* game art was made using krita
+* music and SFX from pixabay
+* Font: https://jamegam.hackclub.com
