@@ -1,0 +1,46 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+
+public class CoffeFiller : MonoBehaviour
+{
+    public Kitchen_prepare kitchen_Prepare;
+    public Image UnfilledCoffeimage;
+    public Sprite FilledCoffeimage;
+    public RectTransform rt;
+    public bool coffeFilled;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        //kitchen_Prepare = Object.FindAnyObjectByType<Kitchen_prepare>();
+        RectTransform rt = GetComponent<RectTransform>();
+        //kitchen_Prepare.enabled = false;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(coffeFilled == true)
+        {
+            //enable the kitchen prepare script and set coffeFilled to false so it can be filled again
+            kitchen_Prepare.enabled = true;
+            coffeFilled = false;
+            Debug.Log("works!");
+        }
+
+
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("Mug"))
+        {
+            //change the image of the mug to a filled coffe mug and change the size of the mug to fit the filled coffe mug image
+            UnfilledCoffeimage.sprite = FilledCoffeimage;
+            rt.sizeDelta= new Vector2(143.04f, 132.52f);
+            coffeFilled = true;           
+        }
+    }
+
+   
+}
