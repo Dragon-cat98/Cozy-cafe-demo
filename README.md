@@ -51,6 +51,7 @@ If you're using the downloadable version for window:
 * assure that the files are all in the same folder
 * run the unity file that has the name of the game
 * **IMPORTANT:** do not run the unity crash handler
+* if the downloadable version doesn't work try the web version
  
 # Screenshots
 <img width="459.5" height="257" alt="Screenshot 2026-08-03 204140" src="https://github.com/user-attachments/assets/b90ae4c8-df5b-4604-9ec2-6dbb606a9ae1" />
