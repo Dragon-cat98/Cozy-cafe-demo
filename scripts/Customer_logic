@@ -10,6 +10,8 @@ public class Customer_logic : MonoBehaviour
     public float time;
     public float fixed_time;
     GameManager gamemanager;
+    public RandomCustomerSkin randomCustomerSkin;
+    public SpriteRenderer spriteRenderer;
 
 
     public TextMeshProUGUI Payedtext;
@@ -19,13 +21,19 @@ public class Customer_logic : MonoBehaviour
 
     public float fadingPayed_effect;
 
+    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //get references
         gamemanager = Object.FindAnyObjectByType<GameManager>();
-        
+        randomCustomerSkin = Object.FindAnyObjectByType<RandomCustomerSkin>();
+        randomCustomerSkin.ChangeSprite();
+
     }
+
+    
 
     // Update is called once per frame
     void Update()
@@ -38,17 +46,19 @@ public class Customer_logic : MonoBehaviour
             /*moves the customer towards the counter if the button hasn't been pressed
          otherwise moves the customer away from the counter to the starting position*/
          if(gamemanager.buttonPressed == true)
-         {
-         transform.position = Vector3.MoveTowards(transform.position, target2.position, speed * Time.deltaTime);
-         }
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target2.position, speed * Time.deltaTime);
+                spriteRenderer.flipX = true;
+            }
          else
-         {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-         }
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+                spriteRenderer.flipX = false;
+            }
         }
 
 
-        //if the customer has been served dispaly teh amount of money he gave
+        //if the customer has been served dispaly the amount of money he gave
         //and starts a timer 
         if(gamemanager.buttonPressed == true)
         {
@@ -72,6 +82,7 @@ public class Customer_logic : MonoBehaviour
         //uses tag to check if customer arrived at the counter
         if(other.CompareTag("Ordine"))
         {
+            //if the customer has arrived at the counter the panel is displayed
             Debug.Log("Pronto per ordinare");
             Panel.SetActive(true);
         }
@@ -79,9 +90,13 @@ public class Customer_logic : MonoBehaviour
        //uses tag to check if customer arrived at the starting position
         if(other.CompareTag("Stop"))
         {
+            //resets the timer if the custoemr has reached the starting point
             Debug.Log("Fermato");
             time = fixed_time;
             gamemanager.buttonPressed = false;
+
+            //change the sprite of the customer to a random one when it reaches the starting position
+            randomCustomerSkin.ChangeSprite();
 
             //resets teh timer if the custoemr has reached the starting point
             fadingPayed_effect = fadingPayed_effectTime;
