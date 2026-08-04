@@ -1,23 +1,49 @@
 
+using System.Net.Security;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AdaptivePerformance;
 using UnityEngine.UI;
 public class Kitchen_prepare : MonoBehaviour
 {
-
+    [Header("General")]
     public bool Clicked_coffe = false;
     public float time = 2;
     public float fixed_time = 2;
     public bool contact;
-    public GameObject Coffe_Kitchen;
-    public RectTransform Position_kitchen;
+
+    [Header("Spawn Objects")]
+    public GameObject Empty_Coffe_Kitchen1;
+    public GameObject Empty_Coffe_Kitchen2;
+    public GameObject Empty_Coffe_Kitchen3;
+    public GameObject Empty_Coffe_Kitchen4;
+    public GameObject Empty_Coffe_Kitchen5;
+    public GameObject Empty_Coffe_Kitchen6;
+
+    [Header("Spawn Points")]
+    public RectTransform Position_kitchen1;
+    public RectTransform Position_kitchen2;
+    public RectTransform Position_kitchen3;
+    public RectTransform Position_kitchen4;
+    public RectTransform Position_kitchen5;
+    public RectTransform Position_kitchen6;
+
+    [Header("Position Checkers")]
+    public bool Pos1_free = true;
+    public bool Pos2_free = true;
+    public bool Pos3_free = true;
+    public bool Pos4_free = true;
+    public bool Pos5_free = true;
+    public bool Pos6_free = true;
     public int Coffes_made;
     public Button PrepButton;
     public bool CanPrepare;
     ShelfChecker shelfChecker;  
+    public Canvas canvas;
 
     public int MaxMadeCoffe = 4;
-    
+    CoffeFiller coffeFiller;
+    GameManager gameManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,6 +52,9 @@ public class Kitchen_prepare : MonoBehaviour
 
         //get references
         shelfChecker = Object.FindAnyObjectByType<ShelfChecker>();
+        coffeFiller = Object.FindAnyObjectByType<CoffeFiller>();
+        gameManager = Object.FindAnyObjectByType<GameManager>();
+        
     }
 
     // Update is called once per frame
@@ -65,12 +94,70 @@ public class Kitchen_prepare : MonoBehaviour
 
     public void Prepare()
     {
-        //function that prepares teh coffes
-        Instantiate(Coffe_Kitchen,Position_kitchen);
-        Coffes_made++;
-        //but before clicking the button runs this function
-        //to check if it can
-        UpdatePrepButton();
+        //checks which position is free and instantiates a coffe object in that position
+        if(Pos1_free == true)
+        {
+            //function that prepares the coffes
+            Instantiate(Empty_Coffe_Kitchen1,Position_kitchen1);
+            Pos1_free = false;
+
+            Coffes_made++;
+            //but before clicking the button runs this function
+            //to check if it can
+            UpdatePrepButton();
+        }
+        else if(Pos2_free == true)
+        {
+            Instantiate(Empty_Coffe_Kitchen2,Position_kitchen2);
+            Pos2_free = false;
+
+            Coffes_made++;
+            //but before clicking the button runs this function
+            //to check if it can
+            UpdatePrepButton();
+        }
+        else if(Pos3_free == true)
+        {
+            Instantiate(Empty_Coffe_Kitchen3,Position_kitchen3);
+            Pos3_free = false;
+
+            Coffes_made++;
+            //but before clicking the button runs this function
+            //to check if it can
+            UpdatePrepButton();
+        }
+        else if(Pos4_free == true)
+        {
+            Instantiate(Empty_Coffe_Kitchen4,Position_kitchen4);
+            Pos4_free = false;
+
+            Coffes_made++;
+            //but before clicking the button runs this function
+            //to check if it can
+            UpdatePrepButton();
+        }
+        else if(Pos5_free == true)
+        {
+            Instantiate(Empty_Coffe_Kitchen5,Position_kitchen5);
+            Pos5_free = false;
+
+            Coffes_made++;
+            //but before clicking the button runs this function
+            //to check if it can
+            UpdatePrepButton();
+        }
+        else if(Pos6_free == true)
+        {
+            Instantiate(Empty_Coffe_Kitchen6,Position_kitchen6);
+            Pos6_free = false;
+
+            Coffes_made++;
+            //but before clicking the button runs this function
+            //to check if it can
+            UpdatePrepButton();
+        }
+
+        
     }
 
 
