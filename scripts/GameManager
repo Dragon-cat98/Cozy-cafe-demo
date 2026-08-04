@@ -12,11 +12,13 @@ public class GameManager : MonoBehaviour
     public bool buttonPressed;
     public bool buttonPressed2;
     Customer_logic customerLogic;
-    Kitchen_prepare kitchen_Prepare;
+    public Kitchen_prepare kitchen_Prepare;
     ShelfChecker shelfChecker;  
 
     public Button servebutton1;
     public Button servebutton2;
+
+    public AudioClip serveSound;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -24,7 +26,7 @@ public class GameManager : MonoBehaviour
     {
         //get references
         customerLogic = Object.FindAnyObjectByType<Customer_logic>();
-        kitchen_Prepare = Object.FindAnyObjectByType<Kitchen_prepare>();
+        //kitchen_Prepare = Object.FindAnyObjectByType<Kitchen_prepare>();
         shelfChecker = Object.FindAnyObjectByType<ShelfChecker>();
     }
 
@@ -60,6 +62,9 @@ public class GameManager : MonoBehaviour
     public void Serve()
     {
         //function that is called when the serve button is pressed, adds money to the total and hides the Panel
+        SoundFXManager.instance.PlaySoundFXClip(serveSound, transform, 1f);
+
+        //function that is called when the serve button is pressed, adds money to the total and hides the Panel
         //used for customer 1
         money += price;
         Panel.SetActive(false);
@@ -67,9 +72,42 @@ public class GameManager : MonoBehaviour
         kitchen_Prepare.Coffes_made --;
         kitchen_Prepare.UpdatePrepButton();
         shelfChecker.CoffeOnShelf--;
+        Debug.Log("If don't work");
+
+        //checks which position is occupied and sets it to free when the customer has been served
+        if(kitchen_Prepare.Pos1_free == false)
+        {
+           kitchen_Prepare.Pos1_free = true;
+           Debug.Log("pos1 free");
+        }
+        else if(kitchen_Prepare.Pos2_free == false)
+        {
+            kitchen_Prepare.Pos2_free = true;
+            Debug.Log("pos2 free");
+
+        }
+        else if(kitchen_Prepare.Pos3_free == false)
+        {
+            kitchen_Prepare.Pos3_free = true;
+        }
+        else if(kitchen_Prepare.Pos4_free == false)
+        {
+            kitchen_Prepare.Pos4_free = true;
+        }
+        else if(kitchen_Prepare.Pos5_free == false)
+        {
+            kitchen_Prepare.Pos5_free = true;
+        }
+        else if(kitchen_Prepare.Pos6_free == false)
+        {
+            kitchen_Prepare.Pos6_free = true;
+        }
     }
     public void Serve2()
     {
+        //function that is called when the serve button is pressed, adds money to the total and hides the Panel
+        SoundFXManager.instance.PlaySoundFXClip(serveSound, transform, 1f);
+        
         //function that is called when the serve button is pressed, adds money to the total and hides the Panel
         //used for the second customer 2
         money += price;
@@ -79,6 +117,31 @@ public class GameManager : MonoBehaviour
         kitchen_Prepare.UpdatePrepButton();
         shelfChecker.CoffeOnShelf--;
 
+        //checks which position is occupied and sets it to free when the customer has been served
+        if(kitchen_Prepare.Pos1_free == false)
+        {
+            kitchen_Prepare.Pos1_free = true;
+        }
+        else if(kitchen_Prepare.Pos2_free == false)
+        {
+            kitchen_Prepare.Pos2_free = true;
+        }
+        else if(kitchen_Prepare.Pos3_free == false)
+        {
+            kitchen_Prepare.Pos3_free = true;
+        }
+        else if(kitchen_Prepare.Pos4_free == false)
+        {
+            kitchen_Prepare.Pos4_free = true;
+        }
+        else if(kitchen_Prepare.Pos5_free == false)
+        {
+            kitchen_Prepare.Pos5_free = true;
+        }
+        else if(kitchen_Prepare.Pos6_free == false)
+        {
+            kitchen_Prepare.Pos6_free = true;
+        }
     }
     
 
