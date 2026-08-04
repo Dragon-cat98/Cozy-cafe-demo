@@ -164,12 +164,11 @@ public class ButtonManager : MonoBehaviour
         }
 
 
-
     }
     public void Upgrade1()
     {
         //function that upgrades the shop when button is pressed
-        gamemanager.price += 5;
+        gamemanager.price += 2;
         gamemanager.money -= Cost;
         Cost += 10;
         clicked1++;
@@ -197,5 +196,4 @@ public class ButtonManager : MonoBehaviour
         clicked3++;
         level3 = true;
     }
-
 }
