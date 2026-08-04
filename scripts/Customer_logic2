@@ -10,6 +10,8 @@ public class Customer_logic2 : MonoBehaviour
     public float time;
     public float fixed_time;
     GameManager gamemanager;
+    public RandomCustomerSkin randomCustomerSkin;
+    public SpriteRenderer spriteRenderer;
 
 
     public TextMeshProUGUI Payedtext2;
@@ -22,7 +24,9 @@ public class Customer_logic2 : MonoBehaviour
     {
         //get references
         gamemanager = Object.FindAnyObjectByType<GameManager>();
-        
+        randomCustomerSkin = Object.FindAnyObjectByType<RandomCustomerSkin>();
+        randomCustomerSkin.ChangeSprite2();
+
     }
 
     // Update is called once per frame
@@ -36,13 +40,15 @@ public class Customer_logic2 : MonoBehaviour
          /*moves the customer towards the counter if the button hasn't been pressed
          otherwise moves the customer away from the counter to the starting position*/
          if(gamemanager.buttonPressed2 == true)
-         {
-         transform.position = Vector3.MoveTowards(transform.position, target4.position, speed * Time.deltaTime);
-         }
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target4.position, speed * Time.deltaTime);
+                spriteRenderer.flipX = true;
+            }
          else
-         {
-            transform.position = Vector3.MoveTowards(transform.position, target3.position, speed * Time.deltaTime);
-         }
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target3.position, speed * Time.deltaTime);
+                spriteRenderer.flipX = false;
+            }
 
         }
 
@@ -78,9 +84,13 @@ public class Customer_logic2 : MonoBehaviour
         //uses tag to check if customer 2 arrived at the starting position
         if(other.CompareTag("Stop"))
         {
+            //resets the timer if the custoemr has reached the starting point
             Debug.Log("Fermato");
             time = fixed_time;
             gamemanager.buttonPressed2 = false;
+
+            //change the sprite of the customer to a random one when it reaches the starting position
+            randomCustomerSkin.ChangeSprite2();
 
             //resets teh timer if the custoemr has reached the starting point
             fadingPayed_effect2 = fadingPayed_effectTime2;
