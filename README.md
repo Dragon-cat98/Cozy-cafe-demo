@@ -57,6 +57,8 @@ If you're using the downloadable version for window:
 <img width="459.5" height="257" alt="Screenshot 2026-08-04 193526" src="https://github.com/user-attachments/assets/4dfe7db0-06c8-438c-a76f-759c6039667e" />
 <img width="459.5" height="257" alt="Screenshot 2026-08-04 193803" src="https://github.com/user-attachments/assets/d3d386f3-14d7-402c-bd7e-347857dec357" />
 
+# AI usage
+* Used claude to solve a logic problem with bools that had got really messy throughout the code and the scripts
 
  # Credits
 * Made with the Unity game engine
