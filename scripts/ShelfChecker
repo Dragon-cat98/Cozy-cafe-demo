@@ -6,7 +6,9 @@ public class ShelfChecker : MonoBehaviour
 {
     Kitchen_prepare kitchen_Prepare;
     public TextMeshProUGUI CoffeCount;
+    public TextMeshProUGUI OrangeCount;
     public int CoffeOnShelf = 0;
+    public int OrangeOnShelf = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,6 +21,8 @@ public class ShelfChecker : MonoBehaviour
     {
         //updates the coffe text to show how many coffes there are
         CoffeCount.text = "" + CoffeOnShelf;
+        //same thing but for orange juice
+        OrangeCount.text = "" + OrangeOnShelf;
     }
 
 
