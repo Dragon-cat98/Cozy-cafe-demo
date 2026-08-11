@@ -5,10 +5,18 @@ using UnityEngine.UI;
 public class CoffeFiller : MonoBehaviour
 {
     public Kitchen_prepare kitchen_Prepare;
+    
+    [Header("coffe")]
     public Image UnfilledCoffeimage;
     public Sprite FilledCoffeimage;
     public RectTransform rt;
     public bool coffeFilled;
+
+    [Header("orange")]
+    public Image UnfilledOrangeimage;
+    public Sprite FilledOrangeimage;
+    public RectTransform rt_Orange;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,12 +41,25 @@ public class CoffeFiller : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Mug"))
+        if(other.CompareTag("Mug") && gameObject.CompareTag("Empty"))
         {
             //change the image of the mug to a filled coffe mug and change the size of the mug to fit the filled coffe mug image
             UnfilledCoffeimage.sprite = FilledCoffeimage;
             rt.sizeDelta= new Vector2(143.04f, 132.52f);
             coffeFilled = true;           
+            gameObject.tag = kitchen_Prepare.CoffeTag;
+
+        }
+
+        if(other.CompareTag("Jug") && gameObject.CompareTag("EmptyOrange"))
+        {
+            Debug.Log("WTF!");
+            //change the image of the cup to a filled orange juice cup and change the size of the mug to fit the filled orange juice cup image
+            UnfilledOrangeimage.sprite = FilledOrangeimage;
+            rt_Orange.sizeDelta= new Vector2(100f, 171.986f);
+            coffeFilled = true;           
+            gameObject.tag = kitchen_Prepare.OrangeTag;
+
         }
     }
 
