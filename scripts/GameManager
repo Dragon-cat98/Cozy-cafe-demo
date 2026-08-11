@@ -4,21 +4,36 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-   
     public int money = 0;
     public int price = 2;
+    public int price_Orange = 5;
     public GameObject Panel;
     public GameObject Panel2;
+    public GameObject Panel_Orange;
+    public GameObject Panel_Orange2;
     public bool buttonPressed;
     public bool buttonPressed2;
+    public bool buttonPressed_Orange;
+    public bool buttonPressed_Orange2;
     Customer_logic customerLogic;
     public Kitchen_prepare kitchen_Prepare;
     ShelfChecker shelfChecker;  
-
     public Button servebutton1;
     public Button servebutton2;
-
+    public Button servebutton_Orange1;
+    public Button servebutton_Orange2;
     public AudioClip serveSound;
+    DropdownValue dropdownValue;
+    [SerializeField] private Button CoffeRemoveButton;
+    [SerializeField] private Button OrangeRemoveButton;
+    
+    
+
+    [Header("Change drinks")]
+    [SerializeField] private GameObject CoffeButton;
+    [SerializeField] private GameObject OrangeButton;
+    [SerializeField] private GameObject CoffeMug;
+    [SerializeField] private GameObject OrangeJug;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -28,6 +43,7 @@ public class GameManager : MonoBehaviour
         customerLogic = Object.FindAnyObjectByType<Customer_logic>();
         //kitchen_Prepare = Object.FindAnyObjectByType<Kitchen_prepare>();
         shelfChecker = Object.FindAnyObjectByType<ShelfChecker>();
+        dropdownValue = Object.FindAnyObjectByType<DropdownValue>();
     }
 
     // Update is called once per frame
@@ -46,14 +62,68 @@ public class GameManager : MonoBehaviour
             //if there aren't any you can't serve the customers
             servebutton1.interactable = false;
             servebutton2.interactable = false;
+
+            CoffeRemoveButton.interactable = false;
         }
         else
         {
             //if you have some you can serve the customer
             servebutton1.interactable = true;
             servebutton2.interactable = true;
+
+            CoffeRemoveButton.interactable = true;
         }
 
+        if(shelfChecker.OrangeOnShelf <= 0)
+        {
+            //if there aren't any you can't serve the customers
+            servebutton_Orange1.interactable = false;
+            servebutton_Orange2.interactable = false;
+
+            OrangeRemoveButton.interactable = false;
+        }
+        else
+        {
+            //if you have some you can serve the customer
+            servebutton_Orange1.interactable = true;
+            servebutton_Orange2.interactable = true;
+
+            OrangeRemoveButton.interactable = true;
+        }
+
+        if(dropdownValue.dropdown.options.Count != 0)
+        {
+            //if the dropdown has any options it turns it on
+            dropdownValue.dropdownObject.SetActive(true);
+        }
+
+        if(dropdownValue.dropdown.options.Count == 0)
+        {
+            //if there are no options in the dropdown menu everything interactable is turned off in the kitchen
+            CoffeButton.SetActive(false);
+            CoffeMug.SetActive(false);
+            OrangeButton.SetActive(false);
+            OrangeJug.SetActive(false);
+            dropdownValue.dropdownObject.SetActive(false);
+        }
+        else if(dropdownValue.PickedEntryIndex == 1)
+        {
+            //if the value of the dropdown is 1 turns on the orange juice objects
+            CoffeButton.SetActive(false);
+            CoffeMug.SetActive(false);
+            OrangeButton.SetActive(true);
+            OrangeJug.SetActive(true);
+
+            
+        }
+        else if(dropdownValue.PickedEntryIndex == 0)
+        {
+            //if the value of the dropdown is 0 turns on the coffe objects
+            CoffeButton.SetActive(true);
+            CoffeMug.SetActive(true);
+            OrangeButton.SetActive(false);
+            OrangeJug.SetActive(false);
+        }
 
 
 
@@ -69,7 +139,7 @@ public class GameManager : MonoBehaviour
         money += price;
         Panel.SetActive(false);
         buttonPressed = true;
-        kitchen_Prepare.Coffes_made --;
+        kitchen_Prepare.Coffes_made--;
         kitchen_Prepare.UpdatePrepButton();
         shelfChecker.CoffeOnShelf--;
         Debug.Log("If don't work");
@@ -103,6 +173,8 @@ public class GameManager : MonoBehaviour
             kitchen_Prepare.Pos6_free = true;
         }
     }
+
+    
     public void Serve2()
     {
         //function that is called when the serve button is pressed, adds money to the total and hides the Panel
@@ -113,7 +185,7 @@ public class GameManager : MonoBehaviour
         money += price;
         Panel2.SetActive(false);
         buttonPressed2 = true;
-        kitchen_Prepare.Coffes_made --;
+        kitchen_Prepare.Coffes_made--;
         kitchen_Prepare.UpdatePrepButton();
         shelfChecker.CoffeOnShelf--;
 
@@ -143,7 +215,123 @@ public class GameManager : MonoBehaviour
             kitchen_Prepare.Pos6_free = true;
         }
     }
-    
 
+    public void Serve_Orange()
+    {
+        //function that is called when the serve button is pressed, adds money to the total and hides the Panel
+        SoundFXManager.instance.PlaySoundFXClip(serveSound, transform, 1f);
+
+        //function that is called when the serve button is pressed, adds money to the total and hides the Panel
+        //used for customer 1
+        money += price_Orange;
+        Panel_Orange.SetActive(false);
+        buttonPressed_Orange = true;
+        kitchen_Prepare.Coffes_made--;
+        kitchen_Prepare.UpdatePrepButton();
+        shelfChecker.OrangeOnShelf--;
+        Debug.Log("If don't work");
+
+        //checks which position is occupied and sets it to free when the customer has been served
+        if(kitchen_Prepare.Pos1_free == false)
+        {
+           kitchen_Prepare.Pos1_free = true;
+           Debug.Log("pos1 free");
+        }
+        else if(kitchen_Prepare.Pos2_free == false)
+        {
+            kitchen_Prepare.Pos2_free = true;
+            Debug.Log("pos2 free");
+
+        }
+        else if(kitchen_Prepare.Pos3_free == false)
+        {
+            kitchen_Prepare.Pos3_free = true;
+        }
+        else if(kitchen_Prepare.Pos4_free == false)
+        {
+            kitchen_Prepare.Pos4_free = true;
+        }
+        else if(kitchen_Prepare.Pos5_free == false)
+        {
+            kitchen_Prepare.Pos5_free = true;
+        }
+        else if(kitchen_Prepare.Pos6_free == false)
+        {
+            kitchen_Prepare.Pos6_free = true;
+        }
+    }
+
+    public void Serve_Orange2()
+    {
+        //function that is called when the serve button is pressed, adds money to the total and hides the Panel
+        SoundFXManager.instance.PlaySoundFXClip(serveSound, transform, 1f);
+        
+        //function that is called when the serve button is pressed, adds money to the total and hides the Panel
+        //used for the second customer 2
+        money += price_Orange;
+        Panel_Orange2.SetActive(false);
+        buttonPressed_Orange2 = true;
+        kitchen_Prepare.Coffes_made--;
+        kitchen_Prepare.UpdatePrepButton();
+        shelfChecker.OrangeOnShelf--;
+
+        //checks which position is occupied and sets it to free when the customer has been served
+        if(kitchen_Prepare.Pos1_free == false)
+        {
+            kitchen_Prepare.Pos1_free = true;
+        }
+        else if(kitchen_Prepare.Pos2_free == false)
+        {
+            kitchen_Prepare.Pos2_free = true;
+        }
+        else if(kitchen_Prepare.Pos3_free == false)
+        {
+            kitchen_Prepare.Pos3_free = true;
+        }
+        else if(kitchen_Prepare.Pos4_free == false)
+        {
+            kitchen_Prepare.Pos4_free = true;
+        }
+        else if(kitchen_Prepare.Pos5_free == false)
+        {
+            kitchen_Prepare.Pos5_free = true;
+        }
+        else if(kitchen_Prepare.Pos6_free == false)
+        {
+            kitchen_Prepare.Pos6_free = true;
+        }
+    }
+
+
+    public void PosChecker()
+    {
+        if(kitchen_Prepare.Pos1_free == false)
+        {
+           kitchen_Prepare.Pos1_free = true;
+           Debug.Log("pos1 free");
+        }
+        else if(kitchen_Prepare.Pos2_free == false)
+        {
+            kitchen_Prepare.Pos2_free = true;
+            Debug.Log("pos2 free");
+
+        }
+        else if(kitchen_Prepare.Pos3_free == false)
+        {
+            kitchen_Prepare.Pos3_free = true;
+        }
+        else if(kitchen_Prepare.Pos4_free == false)
+        {
+            kitchen_Prepare.Pos4_free = true;
+        }
+        else if(kitchen_Prepare.Pos5_free == false)
+        {
+            kitchen_Prepare.Pos5_free = true;
+        }
+        else if(kitchen_Prepare.Pos6_free == false)
+        {
+            kitchen_Prepare.Pos6_free = true;
+        }
+    }
 
 }
