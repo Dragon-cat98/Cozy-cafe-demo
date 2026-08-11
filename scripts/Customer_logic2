@@ -6,7 +6,7 @@ public class Customer_logic2 : MonoBehaviour
     public float speed;
     public Transform target3;
     public Transform target4;
-    public GameObject Panel2;
+    public GameObject [] Panel2;
     public float time;
     public float fixed_time;
     GameManager gamemanager;
@@ -19,6 +19,12 @@ public class Customer_logic2 : MonoBehaviour
     public float fadingPayed_effectTime2 = 2;
     public float fadingPayed_effect2;
 
+    int randomPanel2;
+    public GameObject ChosenPanel2;
+
+    [SerializeField] private DrinkUnlockManager drinkUnlockManager;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,6 +32,7 @@ public class Customer_logic2 : MonoBehaviour
         gamemanager = Object.FindAnyObjectByType<GameManager>();
         randomCustomerSkin = Object.FindAnyObjectByType<RandomCustomerSkin>();
         randomCustomerSkin.ChangeSprite2();
+        drinkUnlockManager = Object.FindAnyObjectByType<DrinkUnlockManager>();
 
     }
 
@@ -39,7 +46,7 @@ public class Customer_logic2 : MonoBehaviour
         {
          /*moves the customer towards the counter if the button hasn't been pressed
          otherwise moves the customer away from the counter to the starting position*/
-         if(gamemanager.buttonPressed2 == true)
+         if(gamemanager.buttonPressed2 == true || gamemanager.buttonPressed_Orange2 == true)
             {
                 transform.position = Vector3.MoveTowards(transform.position, target4.position, speed * Time.deltaTime);
                 spriteRenderer.flipX = true;
@@ -61,6 +68,13 @@ public class Customer_logic2 : MonoBehaviour
             Payed2.SetActive(true);
         }
 
+        if(gamemanager.buttonPressed_Orange2 == true)
+        {
+            Payedtext2.text = "Thanks! +" + gamemanager.price_Orange + "¥";
+            fadingPayed_effect2 -= Time.deltaTime;
+            Payed2.SetActive(true);
+        }
+
 
         if(fadingPayed_effect2 <=0)
         {
@@ -78,16 +92,31 @@ public class Customer_logic2 : MonoBehaviour
         if(other.CompareTag("Ordine"))
         {
             Debug.Log("Pronto per ordinare");
-            Panel2.SetActive(true);
+
+            if(drinkUnlockManager.UnlockedOrange == true)
+            {
+            randomPanel2 = Random.Range(0, Panel2.Length);
+            ChosenPanel2 = Panel2[randomPanel2];
+            ChosenPanel2.SetActive(true);
+            }
+            else
+            {
+                randomPanel2 = Random.Range(0, 0);
+                ChosenPanel2 = Panel2[randomPanel2];
+                ChosenPanel2.SetActive(true);
+            }
         }
 
         //uses tag to check if customer 2 arrived at the starting position
         if(other.CompareTag("Stop"))
         {
+            ChosenPanel2 = null;
+            
             //resets the timer if the custoemr has reached the starting point
             Debug.Log("Fermato");
             time = fixed_time;
             gamemanager.buttonPressed2 = false;
+            gamemanager.buttonPressed_Orange2 = false;
 
             //change the sprite of the customer to a random one when it reaches the starting position
             randomCustomerSkin.ChangeSprite2();
