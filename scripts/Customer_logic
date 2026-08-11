@@ -6,21 +6,24 @@ public class Customer_logic : MonoBehaviour
     public float speed;
     public Transform target;
     public Transform target2;
-    public GameObject Panel;
     public float time;
     public float fixed_time;
     GameManager gamemanager;
     public RandomCustomerSkin randomCustomerSkin;
     public SpriteRenderer spriteRenderer;
 
-
     public TextMeshProUGUI Payedtext;
     public GameObject Payed;
 
     public float fadingPayed_effectTime = 2;
-
     public float fadingPayed_effect;
 
+    [Header("random_Ballon")]
+    public GameObject [] Panel;
+    int randomPanel;
+    public GameObject ChosenPanel;
+
+    [SerializeField] private DrinkUnlockManager drinkUnlockManager;
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,7 +33,7 @@ public class Customer_logic : MonoBehaviour
         gamemanager = Object.FindAnyObjectByType<GameManager>();
         randomCustomerSkin = Object.FindAnyObjectByType<RandomCustomerSkin>();
         randomCustomerSkin.ChangeSprite();
-
+        drinkUnlockManager = Object.FindAnyObjectByType<DrinkUnlockManager>();
     }
 
     
@@ -45,7 +48,7 @@ public class Customer_logic : MonoBehaviour
         {
             /*moves the customer towards the counter if the button hasn't been pressed
          otherwise moves the customer away from the counter to the starting position*/
-         if(gamemanager.buttonPressed == true)
+         if(gamemanager.buttonPressed == true || gamemanager.buttonPressed_Orange == true)
             {
                 transform.position = Vector3.MoveTowards(transform.position, target2.position, speed * Time.deltaTime);
                 spriteRenderer.flipX = true;
@@ -67,6 +70,15 @@ public class Customer_logic : MonoBehaviour
             Payed.SetActive(true);
         }
 
+        //if the customer has been served dispaly the amount of money he gave
+        //and starts a timer 
+        if(gamemanager.buttonPressed_Orange == true)
+        {
+            Payedtext.text = "Thanks! +" + gamemanager.price_Orange + "¥";
+            fadingPayed_effect -= Time.deltaTime;
+            Payed.SetActive(true);
+        }
+
         //when the timer runs out the text disappears
         if(fadingPayed_effect <=0)
         {
@@ -84,16 +96,34 @@ public class Customer_logic : MonoBehaviour
         {
             //if the customer has arrived at the counter the panel is displayed
             Debug.Log("Pronto per ordinare");
-            Panel.SetActive(true);
+
+            //if the orange juice drink has been unlocked add the orange juice
+            //to the options of customer order
+            if(drinkUnlockManager.UnlockedOrange == true)
+            {
+                randomPanel = Random.Range(0, Panel.Length);
+                ChosenPanel = Panel[randomPanel];
+                ChosenPanel.SetActive(true);
+            }
+            else
+            {
+                //otherwise the only option of order is coffe
+                randomPanel = Random.Range(0, 0);
+                ChosenPanel = Panel[randomPanel];
+                ChosenPanel.SetActive(true);
+            }
         }
 
        //uses tag to check if customer arrived at the starting position
         if(other.CompareTag("Stop"))
         {
+            ChosenPanel = null;
+            
             //resets the timer if the custoemr has reached the starting point
             Debug.Log("Fermato");
             time = fixed_time;
             gamemanager.buttonPressed = false;
+            gamemanager.buttonPressed_Orange = false;
 
             //change the sprite of the customer to a random one when it reaches the starting position
             randomCustomerSkin.ChangeSprite();
