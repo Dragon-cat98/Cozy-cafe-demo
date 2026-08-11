@@ -12,13 +12,21 @@ public class Kitchen_prepare : MonoBehaviour
     public float fixed_time = 2;
     public bool contact;
 
-    [Header("Spawn Objects")]
+    [Header("Spawn Object: Coffes")]
     public GameObject Empty_Coffe_Kitchen1;
     public GameObject Empty_Coffe_Kitchen2;
     public GameObject Empty_Coffe_Kitchen3;
     public GameObject Empty_Coffe_Kitchen4;
     public GameObject Empty_Coffe_Kitchen5;
     public GameObject Empty_Coffe_Kitchen6;
+    
+    [Header("Spawn Object: Orange")]
+    public GameObject Empty_Orange_Kitchen1;
+    public GameObject Empty_Orange_Kitchen2;
+    public GameObject Empty_Orange_Kitchen3;
+    public GameObject Empty_Orange_Kitchen4;
+    public GameObject Empty_Orange_Kitchen5;
+    public GameObject Empty_Orange_Kitchen6;
 
     [Header("Spawn Points")]
     public RectTransform Position_kitchen1;
@@ -37,6 +45,7 @@ public class Kitchen_prepare : MonoBehaviour
     public bool Pos6_free = true;
     public int Coffes_made;
     public Button PrepButton;
+    public Button PrepButton_Orange;
     public bool CanPrepare;
     ShelfChecker shelfChecker;  
     public Canvas canvas;
@@ -44,11 +53,15 @@ public class Kitchen_prepare : MonoBehaviour
     public int MaxMadeCoffe = 4;
     CoffeFiller coffeFiller;
     GameManager gameManager;
+    public string CoffeTag;
+    public string OrangeTag;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //initiate the prepbutton state to true
         PrepButton.interactable = true;
+        //PrepButton_Orange.interactable = true;
 
         //get references
         shelfChecker = Object.FindAnyObjectByType<ShelfChecker>();
@@ -76,16 +89,26 @@ public class Kitchen_prepare : MonoBehaviour
         CanPrepare = Coffes_made < MaxMadeCoffe;
         //the ouput of the bool value decides the state of the button 
         PrepButton.interactable = CanPrepare;
+        PrepButton_Orange.interactable = CanPrepare;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         //sets the contact bool to true
         contact = true;
-        if(other.CompareTag("Box"))
+        if(other.CompareTag("Box") && gameObject.CompareTag(CoffeTag))
         {
             //adds 1 coffe to the coffes on the shelfs
             shelfChecker.CoffeOnShelf++;
+            Debug.Log("idk");
+            //and destroys the object
+            Destroy(gameObject);
+        }
+
+        if (other.CompareTag("Box") && gameObject.CompareTag(OrangeTag))
+        {
+            //adds 1 orange juice to the orange uices on the shelfs
+            shelfChecker.OrangeOnShelf++;
             Debug.Log("idk");
             //and destroys the object
             Destroy(gameObject);
@@ -156,8 +179,74 @@ public class Kitchen_prepare : MonoBehaviour
             //to check if it can
             UpdatePrepButton();
         }
+    }
 
-        
+
+    public void Prepare_Orange()
+    {
+        //Prepare function but for orange juice
+        //checks which position is free and instantiates a coffe object in that position
+        if(Pos1_free == true)
+        {
+            //function that prepares the coffes
+            Instantiate(Empty_Orange_Kitchen1,Position_kitchen1);
+            Pos1_free = false;
+
+            Coffes_made++;
+            //but before clicking the button runs this function
+            //to check if it can
+            UpdatePrepButton();
+        }
+        else if(Pos2_free == true)
+        {
+            Instantiate(Empty_Orange_Kitchen2,Position_kitchen2);
+            Pos2_free = false;
+
+            Coffes_made++;
+            //but before clicking the button runs this function
+            //to check if it can
+            UpdatePrepButton();
+        }
+        else if(Pos3_free == true)
+        {
+            Instantiate(Empty_Orange_Kitchen3,Position_kitchen3);
+            Pos3_free = false;
+
+            Coffes_made++;
+            //but before clicking the button runs this function
+            //to check if it can
+            UpdatePrepButton();
+        }
+        else if(Pos4_free == true)
+        {
+            Instantiate(Empty_Orange_Kitchen4,Position_kitchen4);
+            Pos4_free = false;
+
+            Coffes_made++;
+            //but before clicking the button runs this function
+            //to check if it can
+            UpdatePrepButton();
+        }
+        else if(Pos5_free == true)
+        {
+            Instantiate(Empty_Orange_Kitchen5,Position_kitchen5);
+            Pos5_free = false;
+
+            Coffes_made++;
+            //but before clicking the button runs this function
+            //to check if it can
+            UpdatePrepButton();
+        }
+        else if(Pos6_free == true)
+        {
+            Instantiate(Empty_Orange_Kitchen6,Position_kitchen6);
+            Pos6_free = false;
+
+            Coffes_made++;
+            //but before clicking the button runs this function
+            //to check if it can
+            UpdatePrepButton();
+        }
     }
 
 
