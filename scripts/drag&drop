@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler {
-/*Credits: Code got from CodeMonkey drag&drop tutorial*/
+public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler{
+
     [SerializeField] private Canvas canvas;
 
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
-
-        Kitchen_prepare kitchen_Prepare;
+    ItemSlot itemSlot;
+    Kitchen_prepare kitchen_Prepare;
     private void Awake() 
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         kitchen_Prepare = Object.FindAnyObjectByType<Kitchen_prepare>();
+        itemSlot = Object.FindAnyObjectByType<ItemSlot>();
 
+        canvas = GetComponentInParent<Canvas>().rootCanvas;
     }
 
     public void OnBeginDrag(PointerEventData eventData) 
@@ -31,6 +33,9 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         //Debug.Log("OnDrag");
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
         kitchen_Prepare.Clicked_coffe = true;
+
+        //gets the scale and the name of the canvas that's being used
+        Debug.Log(canvas.name + " | scaleFactor: " + canvas.scaleFactor);
     }
 
     public void OnEndDrag(PointerEventData eventData) 
@@ -39,6 +44,8 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
     }
+
+    
 
     public void OnPointerDown(PointerEventData eventData) 
     {
