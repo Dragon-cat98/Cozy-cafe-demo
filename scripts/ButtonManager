@@ -11,11 +11,15 @@ public class ButtonManager : MonoBehaviour
     Customer_logic customer_logic;
     Customer_logic2 customer_logic2;
     Kitchen_prepare kitchen_Prepare;
+    [SerializeField] private GameObject MoneyTextObject1;
+    [SerializeField] private GameObject MoneyTextObject2;
+    [SerializeField] private GameObject MoneyTextObject3;
+
 
     //variables for the first upgrade
     [Header("Upgrade 1")]
     public bool level;
-    public int levelnumber;    
+    public int levelnumber;
     public int Cost = 10;
     public int clicked1 = 0;
     public TextMeshProUGUI MaxedUPText;
@@ -23,12 +27,12 @@ public class ButtonManager : MonoBehaviour
     Image image;
     public int UP_Max = 5;
 
-    
+
 
     //variables for the second upgrade
     [Header("Upgrade 2")]
     public bool level2;
-    public int levelnumber2;    
+    public int levelnumber2;
     public int cost2 = 20;
     public int clicked2 = 0;
     public TextMeshProUGUI MaxedUPText2;
@@ -39,14 +43,14 @@ public class ButtonManager : MonoBehaviour
     //variables for the third upgrade
     [Header("Upgrade 3")]
     public bool level3;
-     public int levelnumber3;
+    public int levelnumber3;
     public int cost3 = 25;
     public int clicked3 = 0;
     public TextMeshProUGUI MaxedUPText3;
     public Button button3;
     Image image3;
     public int UP_Max3 = 6;
-    
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -56,6 +60,7 @@ public class ButtonManager : MonoBehaviour
         customer_logic = Object.FindAnyObjectByType<Customer_logic>();
         customer_logic2 = Object.FindAnyObjectByType<Customer_logic2>();
         kitchen_Prepare = Object.FindAnyObjectByType<Kitchen_prepare>();
+
         image = button.GetComponent<Image>();
         image2 = button2.GetComponent<Image>();
         image3 = button3.GetComponent<Image>();
@@ -65,34 +70,34 @@ public class ButtonManager : MonoBehaviour
     void Update()
     {
         //UP1
-        if(level == true)
+        if (level == true)
         {
             /*checks if the paleyr has pressed the upgrade button
             if they did the text shows the level of the upgrade based
             on how many times the button was pressed */
-            MaxedUPText.text = "UP1: Level " + clicked1;
+            MaxedUPText.text = Cost + "";
             levelnumber++;
             level = false;
         }
 
         //UP2
-        if(level2 == true)
+        if (level2 == true)
         {
             /*checks if the player has pressed the upgrade button
             if they did the text shows the level of the upgrade based
             on how many times the button was pressed */
-            MaxedUPText2.text = "UP2: Level " + clicked2;
+            MaxedUPText2.text = cost2 + "";
             levelnumber2++;
             level2 = false;
         }
 
         //UP3
-        if(level3 == true)
+        if (level3 == true)
         {
             /*checks if the player has pressed the upgrade button
             if they did the text shows the level of the upgrade based
             on how many times the button was pressed */
-            MaxedUPText3.text = "UP3: Level " + clicked3;
+            MaxedUPText3.text = cost3 + "";
             levelnumber3++;
             level3 = false;
         }
@@ -100,7 +105,7 @@ public class ButtonManager : MonoBehaviour
         //UP1
         /*checks if the player has enough money to upgrade
         if so enables the button and changes the color of the button to white*/
-        if(gamemanager.money >= Cost)
+        if (gamemanager.money >= Cost)
         {
             button.interactable = true;
             image.color = Color.white;
@@ -110,20 +115,21 @@ public class ButtonManager : MonoBehaviour
             /*if the player doesn't have enough money
             to upgrade disables the button and changes the color of the button to the base color*/
             button.interactable = false;
-            
+
         }
 
-        if(clicked1 >= UP_Max)
+        if (clicked1 >= UP_Max)
         {
             /*if the palyer has done X upgrades disables the Upgrade button
             and shows the text "Maxed"*/
-           MaxedUPText.text = "Maxed";
-           button.interactable = false;
+            MaxedUPText.text = "Maxed";
+            MoneyTextObject1.SetActive(false);
+            button.interactable = false;
         }
-        
+
         //UP2
         //checks if the player has enough money to upgrade
-        if(gamemanager.money >= cost2)
+        if (gamemanager.money >= cost2)
         {
             button2.interactable = true;
             image2.color = Color.white;
@@ -134,17 +140,18 @@ public class ButtonManager : MonoBehaviour
             button2.interactable = false;
         }
 
-        if(clicked2 >= UP_Max2)
+        if (clicked2 >= UP_Max2)
         {
             //if the player has done X upgrades disables the Upgrade button
             //and showthe text "Maxed"
-           MaxedUPText2.text = "Maxed";
-           button2.interactable = false;
+            MaxedUPText2.text = "Maxed";
+            MoneyTextObject2.SetActive(false);
+            button2.interactable = false;
         }
 
         //UP3
         //checks if the player has enough money to upgrade
-        if(gamemanager.money >= cost3)
+        if (gamemanager.money >= cost3)
         {
             button3.interactable = true;
             image3.color = Color.white;
@@ -155,12 +162,13 @@ public class ButtonManager : MonoBehaviour
             button3.interactable = false;
         }
 
-        if(clicked3 >= UP_Max3)
+        if (clicked3 >= UP_Max3)
         {
             //if the player has done X upgrades disables the Upgrade button
             //and showthe text "Maxed"
-           MaxedUPText3.text = "Maxed";
-           button3.interactable = false;
+            MaxedUPText3.text = "Maxed";
+            MoneyTextObject3.SetActive(false);
+            button3.interactable = false;
         }
 
 
@@ -170,10 +178,11 @@ public class ButtonManager : MonoBehaviour
         //function that upgrades the shop when button is pressed
         gamemanager.price += 2;
         gamemanager.money -= Cost;
+        SummaryScript.instance.Expenses += Cost;
         Cost += 10;
         clicked1++;
         level = true;
-        
+
     }
 
     public void Upgrade2()
@@ -182,6 +191,7 @@ public class ButtonManager : MonoBehaviour
         customer_logic.fixed_time -= 2.0f;
         customer_logic2.fixed_time -= 2.0f;
         gamemanager.money -= cost2;
+        SummaryScript.instance.Expenses += cost2;
         cost2 += 15;
         clicked2++;
         level2 = true;
@@ -192,6 +202,7 @@ public class ButtonManager : MonoBehaviour
         //function that upgrades the shop when button is pressed
         kitchen_Prepare.MaxMadeCoffe += 1;
         gamemanager.money -= cost3;
+        SummaryScript.instance.Expenses += cost3;
         cost3 += 20;
         clicked3++;
         level3 = true;
