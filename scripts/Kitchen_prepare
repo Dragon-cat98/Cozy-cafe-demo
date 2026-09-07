@@ -117,6 +117,7 @@ public class Kitchen_prepare : MonoBehaviour
 
     public void Prepare()
     {
+        SummaryScript.instance.drinks_made++;
         //checks which position is free and instantiates a coffe object in that position
         if(Pos1_free == true)
         {
@@ -184,6 +185,7 @@ public class Kitchen_prepare : MonoBehaviour
 
     public void Prepare_Orange()
     {
+        SummaryScript.instance.drinks_made++;
         //Prepare function but for orange juice
         //checks which position is free and instantiates a coffe object in that position
         if(Pos1_free == true)
