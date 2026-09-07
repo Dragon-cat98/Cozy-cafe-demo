@@ -65,8 +65,8 @@ If you're using the downloadable version for window:
  
 # Screenshots
 <img width="459.5" height="257" alt="Screenshot 2026-08-03 204140" src="https://github.com/user-attachments/assets/b90ae4c8-df5b-4604-9ec2-6dbb606a9ae1" />
-<img width="459.5" height="257" alt="Screenshot 2026-08-04 193526" src="https://github.com/user-attachments/assets/4dfe7db0-06c8-438c-a76f-759c6039667e" />
-<img width="459.5" height="257" alt="Screenshot 2026-08-04 193803" src="https://github.com/user-attachments/assets/d3d386f3-14d7-402c-bd7e-347857dec357" />
+<img width="459.5" height="257" alt="Screenshot 2026-09-07 210305" src="https://github.com/user-attachments/assets/2c5909fa-8d44-4f03-aeb0-fa3603263588" />
+<img width="459.5" height="257" alt="Screenshot 2026-09-07 210316" src="https://github.com/user-attachments/assets/7396482b-328e-40d9-b45d-54b3a4732920" />
 <img width="459.5" height="257" alt="Screenshot 2026-09-07 203101" src="https://github.com/user-attachments/assets/cf640ec1-7f56-4381-8d56-930acb2baa9e" />
 <img width="459.5" height="257" alt="Screenshot 2026-09-07 203107" src="https://github.com/user-attachments/assets/57cc15e4-6553-49d5-9278-dba532879349" />
 
