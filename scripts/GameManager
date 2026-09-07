@@ -137,6 +137,8 @@ public class GameManager : MonoBehaviour
         //function that is called when the serve button is pressed, adds money to the total and hides the Panel
         //used for customer 1
         money += price;
+        SummaryScript.instance.Revenue += price;
+        SummaryScript.instance.drinks_served++;
         Panel.SetActive(false);
         buttonPressed = true;
         kitchen_Prepare.Coffes_made--;
@@ -183,6 +185,8 @@ public class GameManager : MonoBehaviour
         //function that is called when the serve button is pressed, adds money to the total and hides the Panel
         //used for the second customer 2
         money += price;
+        SummaryScript.instance.Revenue += price;
+        SummaryScript.instance.drinks_served++;
         Panel2.SetActive(false);
         buttonPressed2 = true;
         kitchen_Prepare.Coffes_made--;
@@ -224,6 +228,8 @@ public class GameManager : MonoBehaviour
         //function that is called when the serve button is pressed, adds money to the total and hides the Panel
         //used for customer 1
         money += price_Orange;
+        SummaryScript.instance.Revenue += price;
+        SummaryScript.instance.drinks_served++;
         Panel_Orange.SetActive(false);
         buttonPressed_Orange = true;
         kitchen_Prepare.Coffes_made--;
@@ -269,6 +275,8 @@ public class GameManager : MonoBehaviour
         //function that is called when the serve button is pressed, adds money to the total and hides the Panel
         //used for the second customer 2
         money += price_Orange;
+        SummaryScript.instance.Revenue += price;
+        SummaryScript.instance.drinks_served++;
         Panel_Orange2.SetActive(false);
         buttonPressed_Orange2 = true;
         kitchen_Prepare.Coffes_made--;
