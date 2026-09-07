@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,23 +6,30 @@ using UnityEngine.UI;
 public class CoffeFiller : MonoBehaviour
 {
     public Kitchen_prepare kitchen_Prepare;
+    ToolTipTrigger toolTipTrigger ;
     
     [Header("coffe")]
     public Image UnfilledCoffeimage;
     public Sprite FilledCoffeimage;
     public RectTransform rt;
     public bool coffeFilled;
+    public string coffeHeader;
+    public string coffeContent;
+
 
     [Header("orange")]
     public Image UnfilledOrangeimage;
     public Sprite FilledOrangeimage;
     public RectTransform rt_Orange;
+    public string orangeHeader;
+    public string orangeContent;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //kitchen_Prepare = Object.FindAnyObjectByType<Kitchen_prepare>();
         RectTransform rt = GetComponent<RectTransform>();
+        toolTipTrigger = GetComponent<ToolTipTrigger>();
         //kitchen_Prepare.enabled = false;
     }
 
@@ -49,6 +57,8 @@ public class CoffeFiller : MonoBehaviour
             coffeFilled = true;           
             gameObject.tag = kitchen_Prepare.CoffeTag;
 
+            toolTipTrigger.content = coffeContent;
+            toolTipTrigger.header = coffeHeader;
         }
 
         if(other.CompareTag("Jug") && gameObject.CompareTag("EmptyOrange"))
@@ -60,6 +70,8 @@ public class CoffeFiller : MonoBehaviour
             coffeFilled = true;           
             gameObject.tag = kitchen_Prepare.OrangeTag;
 
+            toolTipTrigger.content = orangeContent;
+            toolTipTrigger.header = orangeHeader;
         }
     }
 
