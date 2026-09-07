@@ -14,13 +14,14 @@ https://dragoncat420.itch.io/cozy-cafe-demo
 **Objective:** 
 * Prepare drinks for the customers
 * Serve the customers
-* **Be aware** at the start you can only make 4 coffe drinks at a time and goes up to 6 with upgrades
+* **Be aware** at the start you can only make 4 drinks at a time and goes up to 6 with upgrades
 
-**How to prepare the drinks:** <img align = "right" width="448.5" height="246" alt="20260803-1749-03 5179592" src="https://github.com/user-attachments/assets/b6acedce-a685-4ee5-a22f-9f1d169865d7" />
+**How to prepare the drinks:** <img align = "right" width="448.5" height="246" alt="20260907-1826-18 2620637" src="https://github.com/user-attachments/assets/5ffb8fb8-1070-4012-8364-6b6034d98f19" />
 
 * open the kitchen panel
 * click the empty drink cup
 * fill the drink cups using the drink filler
+
 * drag the full drink cups to the box
 * serve the drinks to the customers
 
@@ -34,15 +35,19 @@ https://dragoncat420.itch.io/cozy-cafe-demo
 * Day system
 * Time system
 * End of the day shop
+* Remove the drinks if there are too many of 1 type
+
 
 # Content of the demo
-* 2 types of drinks <img align = "right" width="250" height="255" alt="Screenshot 2026-08-04 191302" src="https://github.com/user-attachments/assets/71485220-ff01-419f-a31e-18361621ddfd" />
+* 2 types of drinks <img align = "right" width="500" height="255" alt="Screenshot 2026-09-07 203107" src="https://github.com/user-attachments/assets/6d05f1be-4adf-4bfc-b289-97be125c185e" />
+   + Drink 2 unlocks after completing day 2
 * 3 upgrades
    + Upgrade 1: Increases the coffe price by 2¥
    + Upgrade 2: decreases the time of customer arrival
    + Upgrade 3: Increases the number of coffes you can brew
 * Customer serving
 * Very cozy game loop
+* Shift system that makes you able to play the game on loop
 # How to launch
 <img align = "right" width="450.5" height="450.5" alt="cozy" src="https://github.com/user-attachments/assets/595378b3-46c1-4722-87e6-127d8e60592e" />
 
@@ -62,9 +67,12 @@ If you're using the downloadable version for window:
 <img width="459.5" height="257" alt="Screenshot 2026-08-03 204140" src="https://github.com/user-attachments/assets/b90ae4c8-df5b-4604-9ec2-6dbb606a9ae1" />
 <img width="459.5" height="257" alt="Screenshot 2026-08-04 193526" src="https://github.com/user-attachments/assets/4dfe7db0-06c8-438c-a76f-759c6039667e" />
 <img width="459.5" height="257" alt="Screenshot 2026-08-04 193803" src="https://github.com/user-attachments/assets/d3d386f3-14d7-402c-bd7e-347857dec357" />
+<img width="459.5" height="257" alt="Screenshot 2026-09-07 203101" src="https://github.com/user-attachments/assets/cf640ec1-7f56-4381-8d56-930acb2baa9e" />
+<img width="459.5" height="257" alt="Screenshot 2026-09-07 203107" src="https://github.com/user-attachments/assets/57cc15e4-6553-49d5-9278-dba532879349" />
+
 
 # AI usage
-* Used claude to solve a logic problem with bools that had got really messy throughout the code and the scripts
+* Used AI for debugging complicated parts of the code
 
  # Credits
 * Made with the Unity game engine
