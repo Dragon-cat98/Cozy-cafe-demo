@@ -20,6 +20,7 @@ public class DrinkRemover : MonoBehaviour
 
    public void RemoveOrange()
    {
+      SummaryScript.instance.drinks_trashed++;
       //used to remove an orange juice drink if there are too many and
       //the player is in need of other drinks
       kitchenPrepare.Coffes_made--;
@@ -31,6 +32,7 @@ public class DrinkRemover : MonoBehaviour
 
    public void RemoveCoffe()
    {
+      SummaryScript.instance.drinks_trashed++;
       //used to remove a coffe drink if there are too many and
       //the player is in need of other drinks
       kitchenPrepare.Coffes_made--;
